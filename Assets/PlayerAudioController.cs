@@ -14,14 +14,17 @@ public class PlayerAudioController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sources = GetComponent<AudioSource>[];
+        sources = GetComponent<AudioSource[]>();
         rb = GetComponent<Rigidbody>();
         weight = rb.mass;
+        sources[1].pitch = 1.0f / weight;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Actualizamos la velocidad de la bola con la magnitud actual del rigid object
+        this.speed = rb.velocity.magnitude;
         if (speed > 0.1 && ifPlaying)
         {
             ifPlaying = true;
@@ -32,14 +35,14 @@ public class PlayerAudioController : MonoBehaviour
             ifPlaying = false;
             sources[0].Stop();
         }
-        
-        sources[0].pitch + speed / (weight + 2.0f);
+        sources[0].pitch = speed / (weight + 2.0f); // Aplicamos fórmula para variar el pitch según la velocidad
     }
 
 
     void OnCollisionEnter(Collision collision)
     {
-        print["collision"];
+        // Cuando hay una colisión reproducimos el sonido 1 del array
+        print("collision");
         sources[1].Play();
     }
 }

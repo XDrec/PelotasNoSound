@@ -20,7 +20,8 @@ public class Collisionsound : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        print["collision"];
-        sources[1].Play();
+        // Cuando se detecta colisión mostramos en el terminal que hay colisión y reproducimos el sonido
+        print("collision");
+        source.Play();
     }
 }
